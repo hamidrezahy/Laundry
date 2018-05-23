@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Laundry.Data.Models.Employee.EmployeeIndexRowModel>
+
+@{
+    ViewData["Title"] = "کارمندان";
+}
+
+<h2>لیست کارمندان</h2>
+
+<p>
+    <a asp-action="add">ایجاد مشتری جدید</a>
+</p>
+<table class="table table-hover table-responsive table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salary)
+            </th>
+            <th>تنظیمات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salary)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Detail", "Employee", new { nCode = item.NCode })">
+                            <span class="glyphicon glyphicon-info-sign pull-right"></span>
+                        </a>
+                        <span class="pull-right">&nbsp;|&nbsp;</span>
+                        <a href="@Url.Action("Delete", "Employee", new { nCode = item.NCode })">
+                            <span class="glyphicon glyphicon-trash pull-right"></span>
+                        </a>
+                        <span class="pull-right">&nbsp;|&nbsp;</span>
+                        <a href="@Url.Action("Edit", "Employee", new { nCode = item.NCode })">
+                            <span class="glyphicon glyphicon-edit pull-right"></span>
+                        </a>
+                    </td>
+                </tr>
+            }}
+    </tbody>
+</table>

@@ -1,0 +1,42 @@
+﻿@model Laundry.Data.Models.Service.ServiceModel
+
+@{
+    ViewData["Title"] = "Add";
+    CategoryDDLModel category = (CategoryDDLModel)ViewData["categoryDDL"];
+
+}
+
+<h2>ایجاد سرویس جدید</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-inline">
+                <label asp-for="Category" class="col-md-3 control-label"></label>
+                <div class="col-md-9">
+                    <select asp-for="Category" asp-items="@category.CategoryList"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cost" class="control-label"></label>
+                <input asp-for="Cost" class="form-control" />
+                <span asp-validation-for="Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ایجاد" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">برگشت به لیست</a>
+</div>
+

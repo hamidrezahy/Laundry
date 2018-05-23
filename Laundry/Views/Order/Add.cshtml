@@ -1,0 +1,67 @@
+﻿@model Laundry.Data.Models.Order.OrderAddModel
+
+@{
+    ViewData["Title"] = "Add";
+    EmployeeDDLModel emp = (EmployeeDDLModel)ViewData["EmpDDL"];
+    CustomerDDLModel ctm = (CustomerDDLModel)ViewData["CtmDDL"];
+    ServiceDDLModel srv = (ServiceDDLModel)ViewData["SrvDDL"];
+}
+
+<h2>ثبت سفارش جدید</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-inline">
+                <label asp-for="Employee_NationalCode" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="Employee_NationalCode" asp-items="@emp.EmployeeList"></select>
+                </div>
+            </div>
+            <div class="form-inline">
+
+                <label asp-for="Customer_Phone" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="Customer_Phone" asp-items="@ctm.CustomerList"></select>
+                </div>
+
+            </div>
+            <div class="form-inline">
+                <label asp-for="Service_ID" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="Service_ID" asp-items="@srv.ServiceList"></select>
+                </div>
+            </div>
+            <div class="form-inline" style="margin-top:120px;">
+                <label asp-for="AfterDate" class="control-label"></label>
+                
+                <input asp-for="AfterDate" class="form-control" />
+                <span>روز بعد</span>
+                <span asp-validation-for="AfterDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ایجاد" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">برگشت به لیست</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

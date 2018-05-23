@@ -1,0 +1,35 @@
+﻿@model Laundry.Data.Models.Service.ServiceModel
+
+@{
+    ViewData["Title"] = "جزئیات سرویس";
+}
+
+<h2>جزئیات سرویس</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">برگشت به لیست</a> | 
+    @Html.ActionLink("حذف", "Delete", new { id = Model.Service_ID})
+</div>

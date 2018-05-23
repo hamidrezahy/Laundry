@@ -1,0 +1,127 @@
+﻿@model Laundry.Data.Models.Order.OrderDetailModel
+
+@{
+    ViewData["Title"] = "جزئیات سفارش";
+}
+
+<h2>جزئیات</h2>
+
+<div class="row">
+    <div class="col-lg-6">
+        <h4>سفارش</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Order_ID)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Order_ID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd>
+                @Model.Date.ToFriendlyPersianDateTextify()
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DeliveryDate)
+            </dt>
+            <dd>
+                @Model.DeliveryDate.ToPersianDateTextify()
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Cost)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Cost)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        </dl>
+    </div>
+    <div class="col-lg-6">
+        <h4>سرویس</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Service)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Service)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ServiceCategory)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ServiceCategory)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <h4>کارمند</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Employee)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Employee)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EmployeePhone)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EmployeePhone)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EmployeeEmergencyPhone)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EmployeeEmergencyPhone)
+            </dd>
+        </dl>
+    </div>
+    <div class="col-lg-6">
+        <h4>مشتری</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Customer)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Customer)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CustomerPhone)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CustomerPhone)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CustomerAddress)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CustomerAddress)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">بازگشت به لیست</a> |
+    @Html.ActionLink("حذف", "delete", new { id = Model.Order_ID })
+
+</div>

@@ -1,0 +1,90 @@
+@model Laundry.Data.Models.Service.ServiceIndexModel
+@{
+    ViewBag.Title = "خدمات";
+}
+<h2>خدمات</h2>
+
+<p>
+    <a asp-action="add">ایجاد سرویس جدید</a>
+</p>
+
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <h4>خدمات خشکشویی</h4>
+        <table class="table table-hover table-responsive table-bordered" id="tblWashService">
+            <thead>
+                <tr>
+                    <th>نام</th>
+                    <th>هزینه</th>
+                    <th>تنظیمات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.WashServices != null)
+                {
+                    @foreach (var washService in Model.WashServices)
+                    {
+                        <tr>
+                            <td>@washService.Name</td>
+                            <td>@washService.Cost</td>
+                            <td>
+                                <a asp-controller="Service" asp-action="Detail" asp-route-id="@washService.Service_ID">
+                                    <span class="glyphicon glyphicon-info-sign pull-right"></span>
+                                </a>
+                                <span class="pull-right">&nbsp;|&nbsp;</span>
+                                <a asp-controller="Service" asp-action="Remove" asp-route-id="@washService.Service_ID">
+                                    <span class="glyphicon glyphicon-trash pull-right"></span>
+                                </a>
+                                <span class="pull-right">&nbsp;|&nbsp;</span>
+                                <a asp-controller="Service" asp-action="Edit" asp-route-id="@washService.Service_ID">
+                                    <span class="glyphicon glyphicon-edit pull-right"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <h4>خدمات اتوکشی</h4>
+        <table class="table table-hover table-responsive table-bordered" id="tblIronService">
+            <thead>
+                <tr>
+                    <th>نام</th>
+                    <th>هزینه</th>
+                    <th>تنظیمات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.IronServices != null)
+                {
+                    @foreach (var ironService in Model.IronServices)
+                    {
+                        <tr>
+                            <td>@ironService.Name</td>
+                            <td>@ironService.Cost</td>
+                            <td>
+                                <a asp-controller="Service" asp-action="Detail" asp-route-id="@ironService.Service_ID">
+                                    <span class="glyphicon glyphicon-info-sign pull-right"></span>
+                                </a>
+                                <span class="pull-right">&nbsp;|&nbsp;</span>
+                                <a asp-controller="Service" asp-action="Remove" asp-route-id="@ironService.Service_ID">
+                                    <span class="glyphicon glyphicon-trash pull-right"></span>
+                                </a>
+                                <span class="pull-right">&nbsp;|&nbsp;</span>
+                                <a asp-controller="Service" asp-action="Edit" asp-route-id="@ironService.Service_ID">
+                                    <span class="glyphicon glyphicon-edit pull-right"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <script>
+
+    </script>
+</div>

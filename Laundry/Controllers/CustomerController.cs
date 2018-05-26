@@ -20,12 +20,8 @@ namespace Laundry.Controllers
             dbString = _configuration.GetConnectionString("LaundryConnection");
             _customer = new CustomerService(dbString);
         }
-        public IActionResult Index()
-        {
-            var customerIndexModel = _customer.GetCustomerList();
-            
-            return View(customerIndexModel.Customer);
-        }
+        public IActionResult Index() =>
+            View(new CustomerIndexModel() { Customer = _customer.GetCustomerList() });
         public IActionResult Detail(string phone)
         {
             return View(_customer.Get(phone));

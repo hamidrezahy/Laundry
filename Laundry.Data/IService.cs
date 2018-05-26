@@ -5,8 +5,7 @@ namespace Laundry.Data
 {
     public interface IService
     {
-        ServiceIndexModel GetServiceList();
-        ServiceListModel GetAll();
+        IEnumerable<ServiceIndexRowModel> GetServiceList();
         IEnumerable<ServiceIndexRowModel> GetByCategory(string category);
         ServiceModel Get(int id);
         bool Add(ServiceModel serviceModel);

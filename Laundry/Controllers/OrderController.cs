@@ -30,21 +30,8 @@ namespace Laundry.Controllers
             _customer = new CustomerService(dbString);
             _service = new ServiceService(dbString);
         }
-        public IActionResult Index(string sort = "")
-        {
-            var orderIndexModel = _order.GetOrderList();
-
-            if (sort == "date")
-            {
-                orderIndexModel.Orders = orderIndexModel.Orders.OrderBy(p => p.Date);
-            }
-            else if (sort == "datedesc")
-            {
-                orderIndexModel.Orders = orderIndexModel.Orders.OrderByDescending(p => p.Date);
-            }
-
-            return View(orderIndexModel);
-        }
+        public IActionResult Index() =>
+            View(new OrderIndexModel() { Orders = _order.GetOrderList() });
 
         public IActionResult Detail(int id)
         {
@@ -54,19 +41,31 @@ namespace Laundry.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            //var employees = _employee.GetEmployeeList().Employees.OrderBy(e => e.NCode).Select(x => new { Id = x.NCode, Value = x.FullName });
-            var employees = _employee.GetEmployeeList().Employees.Select(x => new { Id = x.NCode, Value = x.FullName });
-            var customers = _customer.GetCustomerList().Customer.Select(x => new { Id = x.Phone, Value = (x.FullName + " - " + x.Phone) });
-            var services = _service.GetAll().Services.Select(x => new { Id = x.Service_ID, Value = (x.Category == "خشکشویی" ? x.Name + " => خشکشویی - " + x.Cost + " تومان" : x.Name + " => خشکشویی - " + x.Cost + " تومان") });
+            var emp = _employee.GetEmployeeList();
+            var srv = _service.GetServiceList();
+            var ctm = _customer.GetCustomerList();
+
+            var employees =
+                emp?.Select(x => new { Id = x.NCode, Value = x.FullName });
+            var customers =
+                ctm?.Select(x => new { Id = x.Phone, Value = (x.FullName + " - " + x.Phone) });
+            var services =
+                srv?.Select(x => new
+                {
+                    Id = x.Service_ID,
+                    Value = (x.Category == "خشکشویی" ?
+                    x.Name + " => خشکشویی - " + x.Cost + " تومان" :
+                    x.Name + " => اتوکشی - " + x.Cost + " تومان")
+                });
 
             EmployeeDDLModel employeeModel = new EmployeeDDLModel
             {
                 EmployeeList = new SelectList(employees, "Id", "Value")
             };
-            CustomerDDLModel customerModel = new CustomerDDLModel
+            CustomerDDLModel customerModel = ctm != null ? new CustomerDDLModel
             {
                 CustomerList = new SelectList(customers, "Id", "Value")
-            };
+            } : null;
             ServiceDDLModel serviceModel = new ServiceDDLModel
             {
                 ServiceList = new SelectList(services, "Id", "Value")
@@ -103,15 +102,27 @@ namespace Laundry.Controllers
         [HttpGet]
         public IActionResult AddNC()
         {
-            //var employees = _employee.GetEmployeeList().Employees.OrderBy(e => e.NCode).Select(x => new { Id = x.NCode, Value = x.FullName });
-            var employees = _employee.GetEmployeeList().Employees.Select(x => new { Id = x.NCode, Value = x.FullName });
-            var services = _service.GetAll().Services.Select(x => new { Id = x.Service_ID, Value = (x.Category == "خشکشویی" ? x.Name + " => خشکشویی - " + x.Cost + " تومان" : x.Name + " => خشکشویی - " + x.Cost + " تومان") });
+            var emp = _employee.GetEmployeeList();
+            var srv = _service.GetServiceList();
+
+            //var employees = _employee.GetEmployeeList().Select(x => new { Id = x.NCode, Value = x.FullName });
+            var employees =
+                emp?.Select(x => new { Id = x.NCode, Value = x.FullName });
+            //var services = _service.GetServiceList().Select(x => new { Id = x.Service_ID, Value = (x.Category == "خشکشویی" ? x.Name + " => خشکشویی - " + x.Cost + " تومان" : x.Name + " => خشکشویی - " + x.Cost + " تومان") });
+            var services =
+                srv?.Select(x => new
+                {
+                    Id = x.Service_ID,
+                    Value = (x.Category == "خشکشویی" ?
+                    x.Name + " => خشکشویی - " + x.Cost + " تومان" :
+                    x.Name + " => خشکشویی - " + x.Cost + " تومان")
+                });
 
             EmployeeDDLModel employeeModel = new EmployeeDDLModel
             {
                 EmployeeList = new SelectList(employees, "Id", "Value")
             };
-           
+
             ServiceDDLModel serviceModel = new ServiceDDLModel
             {
                 ServiceList = new SelectList(services, "Id", "Value")

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Laundry.Data.Models.Customer.CustomerIndexRowModel>
+﻿@model Laundry.Data.Models.Customer.CustomerIndexModel
 
 @{
     ViewData["Title"] = "مشتریان";
@@ -11,23 +11,27 @@
 </p>
 <table class="table table-hover table-responsive table-bordered">
     <thead>
+        @if (Model.Customer !=null)
+        {
+
+        }
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FullName)
+                @Html.DisplayNameFor(model => model.Customer.First().FullName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                @Html.DisplayNameFor(model => model.Customer.First().Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Phone)
+                @Html.DisplayNameFor(model => model.Customer.First().Phone)
             </th>
             <th>تنظیمات</th>
         </tr>
     </thead>
     <tbody>
-        @if (Model != null)
+        @if (Model.Customer != null)
         {
-            @foreach (var item in Model)
+            @foreach (var item in Model.Customer)
             {
                 <tr>
                     <td>

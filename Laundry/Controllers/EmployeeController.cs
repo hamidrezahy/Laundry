@@ -23,12 +23,9 @@ namespace Laundry.Controllers
             dbString = _configuration.GetConnectionString("LaundryConnection");
             _employee = new EmployeeService(dbString);
         }
-        public IActionResult Index()
-        {
-            var employeeIndexModel = _employee.GetEmployeeList();
+        public IActionResult Index() =>
+            View(new EmployeeIndexModel() { Employees = _employee.GetEmployeeList() });
 
-            return View(employeeIndexModel.Employees);
-        }
         public IActionResult Detail(string nCode)
         {
             return View(_employee.Get(nCode));

@@ -83,14 +83,31 @@ namespace Laundry.Service.SqlServer
         /// <summary>
         /// Get all service
         /// </summary>
-        public ServiceIndexModel GetServiceList() => new ServiceIndexModel
+        public IEnumerable<ServiceIndexRowModel> GetServiceList()
         {
-            WashServices = GetByCategory(Category:"خشکشویی"),
-            IronServices = GetByCategory(Category:"اتوکشی")
-        };
+            DataSet dataSet = GetSelectQuery("execute dbo.GetServiceList;");
+
+            if (dataSet.Tables[0].Rows.Count > 0)
+                return GetServiceList(dataSet.Tables[0].AsEnumerable());
+
+            return null;
+        }
+
+        private IEnumerable<ServiceIndexRowModel> GetServiceList(EnumerableRowCollection<DataRow> erc)
+        {
+            var data = erc.Select(row => new ServiceIndexRowModel
+            {
+                Service_ID = (int)row["S_ID"],
+                Category = (string)row["S_Category"],
+                Name = (string)row["S_Name"],
+                Cost = (int)row["S_Cost"]
+            });
+
+            return data;
+        }
 
         /// <summary>
-        /// Get service by city name
+        /// Get service by category
         /// </summary>
         public IEnumerable<ServiceIndexRowModel> GetByCategory(string Category)
         {
@@ -140,30 +157,5 @@ namespace Laundry.Service.SqlServer
             return data;
         }
 
-        public ServiceListModel GetAll()
-        {
-            DataSet dataSet = GetSelectQuery("SELECT * FROM dbo.[Service] ORDER BY S_Category ASC, S_Name ASC; ");
-
-            if (dataSet.Tables[0].Rows.Count > 0)
-                return new ServiceListModel
-                {
-                    Services = GetServices(dataSet.Tables[0].AsEnumerable())
-                };
-
-            return null;
-        }
-
-        private EnumerableRowCollection<ServiceModel> GetServices(EnumerableRowCollection<DataRow> enumerableRowCollection)
-        {
-            var data = enumerableRowCollection.Select(row => new ServiceModel
-            {
-                Service_ID = (int)row["S_ID"],
-                Name = (string)row["S_Name"],
-                Category = (string)row["S_Category"],
-                Cost = (int)row["S_Cost"]
-            });
-
-            return data;
-        }
     }
 }

@@ -1,5 +1,3 @@
-appsettings.json
-
 *.swp
 *.*~
 project.lock.json
@@ -33,3 +31,5 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+Laundry/appsettings.json
+Laundry/appsettings.Development.json

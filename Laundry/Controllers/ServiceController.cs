@@ -1,4 +1,4 @@
-using Laundry.Data;
+﻿using Laundry.Data;
 using Laundry.Data.Models.Service;
 using Laundry.Models;
 using Laundry.Service.SqlServer;
@@ -24,10 +24,13 @@ namespace Laundry.Controllers
             _service = new ServiceService(dbString);
 
         }
-        public IActionResult Index()
-        {
-            return View(_service.GetServiceList());
-        }
+        public IActionResult Index() =>
+            View(new ServiceIndexModel()
+            {
+                WashServices = _service.GetByCategory("خشکشویی"),
+                IronServices = _service.GetByCategory("اتوکشی")
+            });
+
         public IActionResult Detail(int id)
         {
             return View(_service.Get(id));

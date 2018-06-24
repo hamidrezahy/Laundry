@@ -1,6 +1,7 @@
 using Laundry.Data;
 using Laundry.Data.Models.Customer;
 using Laundry.Service.SqlServer.Tools;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -102,15 +103,12 @@ namespace Laundry.Service.SqlServer
         /// Get all customer
         /// </summary>
         /// 
-        public CustomerIndexModel GetCustomerList()
+        public IEnumerable<CustomerIndexRowModel> GetCustomerList()
         {
             DataSet dataSet = GetSelectQuery("execute dbo.GetCustomerList;");
 
             if (dataSet.Tables[0].Rows.Count > 0)
-                return new CustomerIndexModel
-                {
-                    Customer = GetCustomerList(dataSet.Tables[0].AsEnumerable()).AsEnumerable<CustomerIndexRowModel>()
-                };
+                return GetCustomerList(dataSet.Tables[0].AsEnumerable()).AsEnumerable<CustomerIndexRowModel>();
 
             return null;
         }
@@ -128,15 +126,12 @@ namespace Laundry.Service.SqlServer
         /// <summary>
         /// Get customer by city name
         /// </summary>
-        public CustomerIndexModel GetByCity(string city)
+        public IEnumerable<CustomerIndexRowModel> GetByCity(string city)
         {
             DataSet dataSet = GetSelectQuery("execute dbo.GetCustomerByCity N" + city + ";");
 
             if (dataSet.Tables[0].Rows.Count > 0)
-                return new CustomerIndexModel
-                {
-                    Customer = GetCustomerByCity(dataSet.Tables[0].AsEnumerable()).AsEnumerable<CustomerIndexRowModel>()
-                };
+                return GetCustomerByCity(dataSet.Tables[0].AsEnumerable()).AsEnumerable<CustomerIndexRowModel>();
 
             return null;
         }
@@ -157,15 +152,12 @@ namespace Laundry.Service.SqlServer
         /// <summary>
         /// Get customer by state name
         /// </summary>
-        public CustomerIndexModel GetByState(string state)
+        public IEnumerable<CustomerIndexRowModel> GetByState(string state)
         {
             DataSet dataSet = GetSelectQuery("execute dbo.GetCustomerByState N" + state + ";");
 
             if (dataSet.Tables[0].Rows.Count > 0)
-                return new CustomerIndexModel
-                {
-                    Customer = GetCustomerByState(dataSet.Tables[0].AsEnumerable()).AsEnumerable<CustomerIndexRowModel>()
-                };
+                return GetCustomerByState(dataSet.Tables[0].AsEnumerable()).AsEnumerable<CustomerIndexRowModel>();
 
             return null;
         }

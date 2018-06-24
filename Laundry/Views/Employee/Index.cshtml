@@ -1,42 +1,39 @@
-﻿@model IEnumerable<Laundry.Data.Models.Employee.EmployeeIndexRowModel>
-
+﻿@model Laundry.Data.Models.Employee.EmployeeIndexModel
 @{
     ViewData["Title"] = "کارمندان";
 }
-
 <h2>لیست کارمندان</h2>
-
 <p>
     <a asp-action="add">ایجاد مشتری جدید</a>
 </p>
 <table class="table table-hover table-responsive table-bordered">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Salary)
-            </th>
-            <th>تنظیمات</th>
-        </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employees.First().NCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employees.First().FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employees.First().Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employees.First().Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employees.First().Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employees.First().Salary)
+                </th>
+                <th>تنظیمات</th>
+            </tr>
     </thead>
     <tbody>
-        @if (Model != null)
+        @if (Model.Employees != null)
         {
-            @foreach (var item in Model)
+            @foreach (var item in Model.Employees)
             {
                 <tr>
                     <td>

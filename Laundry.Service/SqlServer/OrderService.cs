@@ -2,6 +2,7 @@ using Laundry.Data;
 using Laundry.Data.Models.Order;
 using Laundry.Service.SqlServer.Tools;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -87,32 +88,26 @@ namespace Laundry.Service.SqlServer
         /// <summary>
         /// Get all order
         /// </summary>
-        public OrderIndexModel GetOrderList()
+        public IEnumerable<OrderIndexRowModel> GetOrderList()
         {
             DataSet dataSet = GetSelectQuery("execute dbo.GetOrderList;");
 
             if (dataSet.Tables[0].Rows.Count > 0)
-                return new OrderIndexModel
-                {
-                    Orders = GetOrderList(dataSet.Tables[0].AsEnumerable()).AsEnumerable<OrderIndexRowModel>()
-                };
+                return GetOrderList(dataSet.Tables[0].AsEnumerable()).AsEnumerable<OrderIndexRowModel>();
 
-            return new OrderIndexModel();
+            return null;
 
         }
 
         /// <summary>
         /// Get order by customer
         /// </summary>
-        public OrderIndexModel GetByCustomer(string customer)
+        public IEnumerable<OrderIndexRowModel> GetByCustomer(string customer)
         {
             DataSet dataSet = GetSelectQuery("execute dbo.GetOrderByCustomer N'" + customer + "';");
 
             if (dataSet.Tables[0].Rows.Count > 0)
-                return new OrderIndexModel
-                {
-                    Orders = GetOrderByCustomer(dataSet.Tables[0].AsEnumerable(), customer).AsEnumerable<OrderIndexRowModel>()
-                };
+                return GetOrderByCustomer(dataSet.Tables[0].AsEnumerable(), customer).AsEnumerable<OrderIndexRowModel>();
 
             return null;
         }
@@ -120,15 +115,12 @@ namespace Laundry.Service.SqlServer
         /// <summary>
         /// Get order by Employee name
         /// </summary>
-        public OrderIndexModel GetByEmployee(string employee)
+        public IEnumerable<OrderIndexRowModel> GetByEmployee(string employee)
         {
             DataSet dataSet = GetSelectQuery("execute dbo.GetOrderByEmployee N'" + employee + "';");
 
             if (dataSet.Tables[0].Rows.Count > 0)
-                return new OrderIndexModel
-                {
-                    Orders = GetOrderByEmployee(dataSet.Tables[0].AsEnumerable(), employee).AsEnumerable<OrderIndexRowModel>()
-                };
+                return GetOrderByEmployee(dataSet.Tables[0].AsEnumerable(), employee).AsEnumerable<OrderIndexRowModel>();
 
             return null;
         }
@@ -136,15 +128,12 @@ namespace Laundry.Service.SqlServer
         /// <summary>
         /// Get order by service
         /// </summary>
-        public OrderIndexModel GetByService(int service)
+        public IEnumerable<OrderIndexRowModel> GetByService(int service)
         {
             DataSet dataSet = GetSelectQuery("execute dbo.GetOrderByEmployee " + service + ";");
 
             if (dataSet.Tables[0].Rows.Count > 0)
-                return new OrderIndexModel
-                {
-                    Orders = GetOrderByService(dataSet.Tables[0].AsEnumerable(), service).AsEnumerable<OrderIndexRowModel>()
-                };
+                return GetOrderByService(dataSet.Tables[0].AsEnumerable(), service).AsEnumerable<OrderIndexRowModel>();
 
             return null;
         }

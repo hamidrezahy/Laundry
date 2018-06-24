@@ -54,34 +54,7 @@
                         </tr>
                     }
                 }
-                @*@foreach (var order in Model.Orders)
-                {
-                    <tr>
-                        <td>@order.Order_ID</td>
-                        <td>@order.Name</td>
-                        <td>@order.Employee</td>
-                        <td>@order.Customer</td>
-                        <td>@order.Service</td>
-                        <td>@order.ServiceCategory</td>
-                        <td>@order.Date.ToShortPersianDateTimeString()</td>
-                        <td>@order.DeliveryDate.ToShortPersianDateString()</td>
-                        <td>@order.Cost</td>
-                        <td>
-                            <a asp-controller="Order" asp-action="Detail" asp-route-id="@order.Order_ID">
-                                <span class="glyphicon glyphicon-info-sign pull-right"></span>
-                            </a>
-                            <span class="pull-right">&nbsp;|&nbsp;</span>
-                            <a asp-controller="Order" asp-action="Delete" asp-route-id="@order.Order_ID">
-                                <span class="glyphicon glyphicon-trash pull-right"></span>
-                            </a>
-                            <span class="pull-right">&nbsp;|&nbsp;</span>
-                            <a asp-controller="Order" asp-action="Edit" asp-route-id="@order.Order_ID">
-                                <span class="glyphicon glyphicon-edit pull-right"></span>
-                            </a>
-                        </td>
-                    </tr>
-                }*@
-            </tbody>
+               </tbody>
         </table>
     </div>
 

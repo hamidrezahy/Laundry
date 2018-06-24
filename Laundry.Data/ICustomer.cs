@@ -1,13 +1,14 @@
 using Laundry.Data;
 using Laundry.Data.Models.Customer;
+using System.Collections.Generic;
 
 namespace Laundry.Data
 {
     public interface ICustomer
     {
-        CustomerIndexModel GetCustomerList();
-        CustomerIndexModel GetByState(string state);
-        CustomerIndexModel GetByCity(string city);
+        IEnumerable<CustomerIndexRowModel> GetCustomerList();
+        IEnumerable<CustomerIndexRowModel> GetByState(string state);
+        IEnumerable<CustomerIndexRowModel> GetByCity(string city);
         CustomerDetailModel Get(string phone);
 
         bool Add(CustomerModel customer);

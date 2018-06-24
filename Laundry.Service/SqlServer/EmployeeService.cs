@@ -115,15 +115,12 @@ namespace Laundry.Service.SqlServer
         /// <summary>
         /// Get all employee
         /// </summary>
-        public EmployeeIndexModel GetEmployeeList()
+        public IEnumerable<EmployeeIndexRowModel> GetEmployeeList()
         {
             DataSet dataSet = GetSelectQuery("execute dbo.GetEmployeeList;");
 
             if (dataSet.Tables[0].Rows.Count > 0)
-                return new EmployeeIndexModel
-                {
-                    Employees = GetEmployeeList(dataSet.Tables[0].AsEnumerable()).AsEnumerable<EmployeeIndexRowModel>()
-                };
+                return GetEmployeeList(dataSet.Tables[0].AsEnumerable()).AsEnumerable<EmployeeIndexRowModel>();
 
             return null;
         }
@@ -144,16 +141,12 @@ namespace Laundry.Service.SqlServer
         /// <summary>
         /// Get employee by city name
         /// </summary>
-        public EmployeeIndexModel GetByCity(string city)
+        public IEnumerable<EmployeeIndexRowModel> GetByCity(string city)
         {
             DataSet dataSet = GetSelectQuery("execute dbo.GetEmployeeByCity N" + city + ";");
 
             if (dataSet.Tables[0].Rows.Count > 0)
-                return new EmployeeIndexModel
-                {
-                    Employees = GetEmployeeByCity(dataSet.Tables[0].AsEnumerable()).AsEnumerable<EmployeeIndexRowModel>()
-                };
-
+                return GetEmployeeByCity(dataSet.Tables[0].AsEnumerable()).AsEnumerable<EmployeeIndexRowModel>();
             return null;
         }
 
@@ -172,15 +165,12 @@ namespace Laundry.Service.SqlServer
         /// <summary>
         /// Get employee by gender
         /// </summary>
-        public EmployeeIndexModel GetByGender(string gender)
+        public IEnumerable<EmployeeIndexRowModel> GetByGender(string gender)
         {
             DataSet dataSet = GetSelectQuery("execute dbo.GetEmployeeByGender N" + gender + ";");
 
             if (dataSet.Tables[0].Rows.Count > 0)
-                return new EmployeeIndexModel
-                {
-                    Employees = GetEmployeeByGender(dataSet.Tables[0].AsEnumerable()).AsEnumerable<EmployeeIndexRowModel>()
-                };
+                return GetEmployeeByGender(dataSet.Tables[0].AsEnumerable()).AsEnumerable<EmployeeIndexRowModel>();
 
             return null;
         }
@@ -200,15 +190,12 @@ namespace Laundry.Service.SqlServer
         /// <summary>
         /// Get employee by state name
         /// </summary>
-        public EmployeeIndexModel GetByState(string state)
+        public IEnumerable<EmployeeIndexRowModel> GetByState(string state)
         {
             DataSet dataSet = GetSelectQuery("execute dbo.GetEmployeeByState N" + state + ";");
 
             if (dataSet.Tables[0].Rows.Count > 0)
-                return new EmployeeIndexModel
-                {
-                    Employees = GetEmployeeByState(dataSet.Tables[0].AsEnumerable()).AsEnumerable<EmployeeIndexRowModel>()
-                };
+                return GetEmployeeByState(dataSet.Tables[0].AsEnumerable()).AsEnumerable<EmployeeIndexRowModel>();
 
             return null;
         }

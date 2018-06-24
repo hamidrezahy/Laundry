@@ -5,10 +5,10 @@ namespace Laundry.Data
 {
     public interface IEmployee
     {
-        EmployeeIndexModel GetEmployeeList();
-        EmployeeIndexModel GetByState(string state);
-        EmployeeIndexModel GetByCity(string city);
-        EmployeeIndexModel GetByGender(string gender);
+        IEnumerable<EmployeeIndexRowModel> GetEmployeeList();
+        IEnumerable<EmployeeIndexRowModel> GetByState(string state);
+        IEnumerable<EmployeeIndexRowModel> GetByCity(string city);
+        IEnumerable<EmployeeIndexRowModel> GetByGender(string gender);
         EmployeeDetailModel Get(string nCode);
         bool Add(EmployeeModel employee);
         bool Remove(string nCode);
